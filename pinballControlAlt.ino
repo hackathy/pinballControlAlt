@@ -30,7 +30,7 @@ void loop() {
   while(setloop < 49){ //placed all the code inside a while loop to allow for pausing the continuous stream of data being thrown at the computer 49 = 1 (ASCII)
     int tier1state = digitalRead(tier1); //read and save the state (LOW/HIGH) of the tier 1 pin(s)
     int tier2state = (digitalRead(tier2a) || digitalRead(tier2b)); //read and save the state (LOW/HIGH) of the tier 2 pin(s)
-    int tier3state = (digitalRead(tier3a) || digitalRead(tier3b) || digitalRead(tier3c));
+    int tier3state = (digitalRead(tier3a) || digitalRead(tier3b) || digitalRead(tier3c)); //read and save the state (LOW/HIGH) of the tier 3 pin(s)
 
     if(tier1state == 1){
       score = score + (tier1pts/50); //adjust the score
