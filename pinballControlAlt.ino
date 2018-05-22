@@ -17,7 +17,6 @@ int tier2pts = 100;
 int tier3pts = 150; //all the *pts variables are for setting different points for different tiers
 
 void setup() {
-  // put your setup code here, to run once:
   Serial.begin(9600); //open a serial connection, for debug purposes - will either be commented out entirely or used for another purpose in later builds
   pinMode(tier1, INPUT);
   pinMode(tier2a, INPUT);
@@ -32,6 +31,7 @@ void loop() {
     int tier1state = digitalRead(tier1); //read and save the state (LOW/HIGH) of the tier 1 pin(s)
     int tier2state = (digitalRead(tier2a) || digitalRead(tier2b)); //read and save the state (LOW/HIGH) of the tier 2 pin(s)
     int tier3state = (digitalRead(tier3a) || digitalRead(tier3b) || digitalRead(tier3c));
+
     if(tier1state == 1){
       score = score + (tier1pts/50);
     }
@@ -41,6 +41,7 @@ void loop() {
     if(tier3state == 1){
       score = score + (tier3pts/50);
     }
+    
     Serial.print(score);
     Serial.print(",");
     Serial.print(score*50);
@@ -50,6 +51,7 @@ void loop() {
     Serial.print(tier2state); //at the moment, anything being printed to the serial console is purely for debugging purposes
     Serial.print(",");
     Serial.println(setloop);
+    
     if (Serial.available() > 0){ //if there is a serial connection
       setloop = Serial.read();  //reading from serial for pausing
     }
