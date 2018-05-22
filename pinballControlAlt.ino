@@ -33,15 +33,16 @@ void loop() {
     int tier3state = (digitalRead(tier3a) || digitalRead(tier3b) || digitalRead(tier3c));
 
     if(tier1state == 1){
-      score = score + (tier1pts/50);
+      score = score + (tier1pts/50); //adjust the score
     }
     if(tier2state == 1){
-      score = score + (tier2pts/50);
+      score = score + (tier2pts/50); //adjust the score
     }
     if(tier3state == 1){
-      score = score + (tier3pts/50);
+      score = score + (tier3pts/50); //adjust the score
     }
     
+    //anything in this paragraph is for debugging purposes
     Serial.print(score);
     Serial.print(",");
     Serial.print(score*50);
@@ -51,16 +52,17 @@ void loop() {
     Serial.print(tier2state); //at the moment, anything being printed to the serial console is purely for debugging purposes
     Serial.print(",");
     Serial.println(setloop);
+    //end debugging section
     
-    if (Serial.available() > 0){ //if there is a serial connection
-      setloop = Serial.read();  //reading from serial for pausing
+    if (Serial.available() > 0){ //if there is a serial connection,
+      setloop = Serial.read(); //read from serial for pausing
     }
-    if (setloop > 48){ //if we are about to pause
+    if (setloop > 48){ //if we are about to pause,
       Serial.println();
       Serial.println("Paused, press space to continue..."); //tell the user/operator we have paused
     }
   }
-  if (Serial.available() > 0){ //if there is a serial connection
-      setloop = Serial.read(); //reading from serial for resuming
+  if (Serial.available() > 0){ //if there is a serial connection,
+    setloop = Serial.read(); //read from serial for resuming
   }
 }
