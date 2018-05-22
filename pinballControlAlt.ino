@@ -1,6 +1,8 @@
 /*
  * Alternative pinball control code
  * Seperate scores for individual bumpers/groups of bumpers
+ *
+ * Nicholas Tzimos, 2018
  */
 int score = 0; //to keep track of score
 int tier1 = 2;
