@@ -11,31 +11,35 @@ int tier2b = 4;
 int tier3a = 5;
 int tier3b = 6;
 int tier3c = 7; //where the number is how far back the bumper is, and the letter is starting from the left (from the player's point of view)
-int setloop = 0;
+int setloop = 0; //for pausing the loop
 int tier1pts = 50;
 int tier2pts = 100;
-int tier3pts = 150;
+int tier3pts = 150; //all the *pts variables are for setting different points for different tiers
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(9600); //open a serial connection, for debug purposes
+  Serial.begin(9600); //open a serial connection, for debug purposes - will either be commented out entirely or used for another purpose in later builds
   pinMode(tier1, INPUT);
   pinMode(tier2a, INPUT);
   pinMode(tier2b, INPUT);
   pinMode(tier3a, INPUT);
   pinMode(tier3b, INPUT);
-  pinMode(tier3c, INPUT); //setting all of the necessary pins to be inputs  
+  pinMode(tier3c, INPUT);//setting all of the necessary pins to be inputs  
 }
 
 void loop() {
   while(setloop < 49){ //placed all the code inside a while loop to allow for pausing the continuous stream of data being thrown at the computer 49 = 1 (ASCII)
-    int tier1state = digitalRead(tier1);
-    int tier2state = (digitalRead(tier2a) || digitalRead(tier2b));
+    int tier1state = digitalRead(tier1); //read and save the state (LOW/HIGH) of the tier 1 pin(s)
+    int tier2state = (digitalRead(tier2a) || digitalRead(tier2b)); //read and save the state (LOW/HIGH) of the tier 2 pin(s)
+    int tier3state = (digitalRead(tier3a) || digitalRead(tier3b) || digitalRead(tier3c));
     if(tier1state == 1){
       score = score + (tier1pts/50);
     }
     if(tier2state == 1){
       score = score + (tier2pts/50);
+    }
+    if(tier3state == 1){
+      score = score + (tier3pts/50);
     }
     Serial.print(score);
     Serial.print(",");
